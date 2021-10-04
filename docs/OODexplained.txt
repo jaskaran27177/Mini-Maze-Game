@@ -1,0 +1,26 @@
+Monster pseudo-random movement:
+The game must support the monsters' pseudo-random movement.
+In our program, we handle this by putting all the monster movement
+logic into the monster class. The Monster class exposes only one
+method as its interface: move. Additionally, the Monster class takes,
+as a parameter, a GameBoard. With information from the GameBoard about
+the maze, the Monster is able to determine how to move. There is also a
+variable that the Monster class keeps track of called "backTrackMove".
+This variable allows the Monster to remember the direction from which it came.
+Altogether, this design is optimal, since there is no need for any other object
+to know anything about the Monsters or their movement; essentially decoupling
+and encapsulating the Monster logic from the rest of the program.
+
+How the GameBoard is drawn:
+The GameBoard is drawn in two separate ways. Firstly, the GameBoard is drawn
+with hidden walls, which are only revealed as the player explores the maze.
+The drawing of this hidden GameBoard is handled by the HiddenMazeDisplayer, which
+takes a GameBoard as a parameter. Secondly, as part of the requirements, a visible
+GameBoard must be drawn at the end of each game or when the letter 'm' is pressed.
+The VisibleMazeDisplayer handles the drawing of this visible GameBoard. We separated
+the drawing into two classes but recognized that they were very similar. So we created
+an interface named IMazeDisplayer, which had one method: print(). Through the use of
+this interface, we were able to make both HiddenMazeDisplayer and VisibleMazeDisplayer
+inherit from one class. This inheritance essentially bound them to a "contract." This
+supports OOD because if we were to add another type of MazeDisplayer, we could easily have
+it implement the IMazeDisplayer and guarantee that it implements the print() method.
